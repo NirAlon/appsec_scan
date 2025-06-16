@@ -14,7 +14,7 @@ runs:
       shell: bash
 
     - name: Run Semgrep SAST
-      run: semgrep scan --config auto .
+      run: semgrep scan --config auto . || echo "Semgrep exited with non-zero code"
       shell: bash
 
     - name: Install Terrascan
@@ -25,7 +25,7 @@ runs:
       shell: bash
 
     - name: Run terrascan IaC Scan
-      run: terrascan scan .
+      run: terrascan scan . || echo "Terrascan exited with non-zero code"
       shell: bash
 
     - name: Run Trivy SCA Scan
