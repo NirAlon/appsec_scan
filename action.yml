@@ -1,5 +1,10 @@
 name: 'AppSec Scanner'
 description: 'Runs SAST (Semgrep), SCA (Trivy), and IaC (terrascan) scans'
+author: 'Nir Alon'
+branding:
+  icon: 'activity'
+  color: 'blue'
+  
 runs:
   using: 'composite'
   steps:
