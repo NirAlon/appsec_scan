@@ -1,0 +1,32 @@
+name: 'AppSec Scanner'
+description: 'Runs SAST (Semgrep), SCA (Trivy), and IaC (terrascan) scans'
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Semgrep
+      run: |
+        pip install semgrep
+      shell: bash
+
+    - name: Run Semgrep SAST
+      run: semgrep scan --config auto .
+      shell: bash
+
+    - name: Install Terrascan
+      run: |
+        curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
+        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
+        sudo install terrascan /usr/local/bin && rm terrascan
+      shell: bash
+
+    - name: Run terrascan IaC Scan
+      run: terrascan scan .
+      shell: bash
+
+    - name: Run Trivy SCA Scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: fs
+        scan-ref: .
+        format: table
+        exit-code: 0
