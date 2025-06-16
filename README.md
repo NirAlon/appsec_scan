@@ -14,5 +14,6 @@ A composite GitHub Action that runs:
 ## Usage
 
 ```yaml
-- uses: your-username/appsec_scan@latest
+- name: AppSec Scanner
+  uses: NirAlon/appsec_scan@latest
 ```
