@@ -10,6 +10,7 @@ A composite GitHub Action that runs:
 
 ```yaml
 - uses: your-username/appsec_scan@v1.0.0
+```
 
 ## Requirements
 
